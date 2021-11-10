@@ -1,4 +1,3 @@
-
 'use strict'
 
 function solveEquation(a, b, c) {
