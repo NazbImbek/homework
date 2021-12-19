@@ -29,7 +29,6 @@ class PrintEditionItem {
     }
 }
 
-
 class Magazine extends PrintEditionItem {
     constructor (name, releaseDate, pagesCount) {
         super(name, releaseDate, pagesCount);
