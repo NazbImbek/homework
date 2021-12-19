@@ -1,98 +1,103 @@
-///Задача №1. 
-class PrintEditionItem {
-  constructor (name, releaseDate, pagesCount) {
-    this.name = name;
-    this.releaseDate = releaseDate;
-    this.pagesCount = pagesCount;
-    this.state = 100;
-    this.type = null;
-    }
- 
-  fix() {
-    return this.state *= 1.5;
-  }
+//"use strict";
 
-  set state(number) {
-    this.state = number;
-    if (number < 0) {
-      this._state = 0; 
-    } else if (number > 100){
-      this._state = 100;
-    } else {
-      this._state = this.state;
+//Задача №1
+
+class PrintEditionItem {
+    constructor (name, releaseDate, pagesCount) {
+        this.name = name;
+        this.releaseDate = releaseDate;
+        this.pagesCount = pagesCount;
+        this.state = 100;
+        this.type = null;
     }
-  }
-  get state() {
-    return this._state;
-  }
+    
+    fix() {
+        return this.state *= 1.5;
+    }
+
+    set state(number) {
+        this._state = number;
+        if (this.state < 0) {
+            this._state = 0;
+        } else if (this.state > 100) {
+            this._state = 100;
+        } else {
+            this._state = this.state;
+        }
+    }
+
+    get state() {
+        return this._state;
+    }
 }
-   
+
+
 class Magazine extends PrintEditionItem {
-  constructor  (name, releaseDate, pagesCount) {
-    super (name, releaseDate, pagesCount)
-    this.type = "magazine";
+    constructor (name, releaseDate, pagesCount) {
+        super(name, releaseDate, pagesCount);
+        this.type = "magazine";
     }
 }
 
 class Book extends PrintEditionItem {
-  constructor  (author, name, releaseDate, pagesCount) {
-    super (name, releaseDate, pagesCount)
-    this.type = "book";
-    this.author = author;
+    constructor (author, name, releaseDate, pagesCount) {
+        super(name, releaseDate, pagesCount);
+        this.author = author;
+        this.type = "book";
     }
 }
 
 class NovelBook extends Book {
-  constructor  (author, name, releaseDate, pagesCount) {
-    super (name, releaseDate, pagesCount)
-    this.type = "novel";
+    constructor (author, name, releaseDate, pagesCount) {
+        super(author, name, releaseDate, pagesCount);
+        this.type = "novel";
     }
 }
 
 class FantasticBook extends Book {
-  constructor  (author, name, releaseDate, pagesCount) {
-    super (name, releaseDate, pagesCount)
-    this.type = "fantastic";
+    constructor (author, name, releaseDate, pagesCount) {
+        super(author, name, releaseDate, pagesCount);
+        this.type = "fantastic";
     }
 }
 
 class DetectiveBook extends Book {
-  constructor  (author, name, releaseDate, pagesCount) {
-    super (name, releaseDate, pagesCount)
-    this.type = "detective";
+    constructor (author, name, releaseDate, pagesCount) {
+        super(author, name, releaseDate, pagesCount);
+        this.type = "detective";
     }
 }
 
-//Задача №2. 
+//Задача №2
 
-class Library {
-  constructor (name){
-    this.name = name;
-    this.books = [];
-  }
-
-
-  addBook(book) {
-  if (this.state > 30) {
-    return this.books.push(book);
+class Library extends PrintEditionItem { 
+    constructor (name, releaseDate, pagesCount) {
+        super(releaseDate, pagesCount);
+        this.name = name;
+        this.books = [];
     }
-  }
 
-  findBookBy(type, value) {
-    for(let i = 0; i < this.books.length; i++) {
-      if(this.books[i][type] === value) {
-        return this.books[i];
-      } 
+    addBook(book) {
+        if (this.state > 30) {
+            this.books.push(book)
+        }
     }
-    return null;
-  }
 
-  giveBookByName(bookName) {
-    for(let i = 0; i < this.books.length; i++) {
-      if (this.books[i].name === bookName) {
-        return  this.books.splice(i, 1)[0];
-      }
+    findBookBy(type, value) {
+        for(let i = 0; i < this.books.length; i++) {
+            if(this.books[i][type] === value) {
+                return this.books[i];
+            } 
+        }
+        return null;
     }
-    return null;
-  }
+
+    giveBookByName(bookName) {
+        for(let i = 0; i < this.books.length; i++) {
+            if (this.books[i].name === bookName) {
+                 return  this.books.splice(i, 1)[0];
+            }
+        }
+        return null;
+    }
 }
